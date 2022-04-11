@@ -1,0 +1,35 @@
+#include <string>
+#include <vector>
+#include <ctype.h>
+
+using namespace std;
+
+string solution(string s, int n) {
+    string answer = "";
+
+    for(int i=0; i<s.length();i++){
+        
+        if(s[i] == ' ')
+            answer += ' ';
+        else if(s[i]>='a' && s[i]<='z')
+            answer += (s[i] + n - 'a' )%26 + 'a';
+        else 
+            answer += (s[i] + n - 'A' )%26 + 'A';
+    }
+    
+    //a~z 아스키코드 65~90
+    //A~Z 아스키코드 97~122
+    // s[i]+n = 91일 때 91 - 65 = 26
+    // 26%26 = 0이므로 거기에 + 'A'를 더하면 'A'
+    // 다른 경우에도 이런식으로 계산됨
+    
+    // 첨에 조건을 isalpha(s[i])를 넣었을 때
+    // 비쥬얼에서는 1을 반환하면 대문자
+    // 2를 반환하면 소문자인데
+    // 여기 사이트에서는, 1과2로 나오지않음..
+    // 찾아보니깐 사이트마다 반환되는 값이 다르다고..
+    // 여기 사이트는 영어이면 1024, 아니면 0으로 분류
+    // 비쥬얼일 경우 편하게 isalpha 사용해도 될듯
+        
+    return answer;
+}

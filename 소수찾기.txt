@@ -1,0 +1,31 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int n) {
+    int answer = 0;
+    bool flag = true;
+    
+    for (int i = 2; i <= n ; i++){
+        for(int j = 2; j*j <= i ; j++){
+            // j*j를 넣는 이유
+            // 16을 예를들자면 1 2 4 8 16
+            // (1,16) (2,8) (4,4) (8,2) (16,1)
+            // 이렇게 되는데 이 같은 쌍인 4가 for문에 마지막으로 더 할 필요없다
+            // 이것을 생각하고 다른 것을 구하면 소수를 구할 수 있다
+            // 말하자면 자기자신을 제곱했을 때 i를 넘지 않을 경우까지 했는데 
+            // if문에 들어가지않았으므로
+            // 더이상 약수는 없다고 볼 수 있고 즉 소수라고 볼 수 있다.
+            if(i%j == 0){
+                flag = false;
+                break;
+            }
+        }
+        if(flag == true)
+                answer++;
+        flag = true;
+    }
+    
+    return answer;
+}
